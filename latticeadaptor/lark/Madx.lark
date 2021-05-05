@@ -1,0 +1,24 @@
+// MADX grammer for parsing sequence files
+
+%ignore /\s+/  // whitespace
+%import common (SIGNED_INT, NUMBER, ESCAPED_STRING)
+
+word         : /[\w\.]+/
+
+start        : (_statement ";")*
+_statement   : element | sequence 
+
+element      : word ":" [word] ("," attribute)* ","?
+attribute    : word ("=" | ":=") (atom|boolean)
+
+sequence     : word ":" "SEQUENCE"i ("," attribute)* ";" seq_elements "ENDSEQUENCE"i
+seq_elements : (seq_element)*
+seq_element  : word "," "at =" atom  ";"
+
+?atom        : NUMBER           -> number
+             | "-" atom         -> neg
+
+?boolean     : true             -> true 
+             | false            -> false
+?true        : "true" 
+?false       : "false"

@@ -1,0 +1,157 @@
+{
+    "MARKER": {},
+    "DRIFT": {
+        "L": 0.0
+    },
+    "SBEND": {
+        "L": 0.0,
+        "ANGLE": 0.0,
+        "TILT": 0.0,
+        "K0": 0.0,
+        "K1": 0.0,
+        "K2": 0.0,
+        "K1S": 0.0,
+        "E1": 0.0,
+        "E2": 0.0,
+        "FINT": 0.0,
+        "FINTX": 0.0,
+        "HGAP": 0.0,
+        "H1": 0.0,
+        "H2": 0.0,
+        "THICK": true
+    },
+    "RBEND": {
+        "L": 0.0,
+        "ANGLE": 0.0,
+        "TILT": 0.0,
+        "K0": 0.0,
+        "K1": 0.0,
+        "K2": 0.0,
+        "K1S": 0.0,
+        "E1": 0.0,
+        "E2": 0.0,
+        "FINT": 0.0,
+        "FINTX": 0.0,
+        "HGAP": 0.0,
+        "H1": 0.0,
+        "H2": 0.0,
+        "THICK": true,
+        "ADD_ANGLE": []
+    },
+    "DIPEDGE": {
+        "H": 0.0,
+        "E1": 0.0,
+        "FINT": 0.0,
+        "HGAP": 0.0,
+        "TILT": 0.0
+    },
+    "QUADRUPOLE": {
+        "L": 0.0,
+        "K1": 0.0,
+        "K1S": 0.0,
+        "TILT": 0.0,
+        "THICK": true
+    },
+    "SEXTUPOLE": {
+        "L": 0.0,
+        "K2": 0.0,
+        "K2S": 0.0,
+        "TILT": 0.0
+    },
+    "OCTUPOLE": {
+        "L": 0.0,
+        "K3": 0.0,
+        "K3S": 0.0,
+        "TILT": 0.0
+    },
+    "MULITPOLE": {
+        "LRAD": 0.0,
+        "TILT": 0.0,
+        "KNL": [],
+        "KNS": []
+    },
+    "SOLENOID": {
+        "L": 0.0,
+        "KS": 0.0,
+        "KSI": 0.0
+    },
+    "HKICKER": {
+        "L": 0.0,
+        "KICK": 0.0,
+        "TILT": 0.0,
+        "SINKICK": 0,
+        "SINPEAK": 0.0,
+        "SINTUNE": 0.0,
+        "SINPHASE": 0.0
+    },
+    "VKICKER": {
+        "L": 0.0,
+        "KICK": 0.0,
+        "TILT": 0.0,
+        "SINKICK": 0,
+        "SINPEAK": 0.0,
+        "SINTUNE": 0.0,
+        "SINPHASE": 0.0
+    },
+    "KICKER": {
+        "L": 0.0,
+        "HKICK": 0.0,
+        "VKICK": 0.0,
+        "TILT": 0.0,
+        "SINKICK": 0,
+        "SINPEAK": 0.0,
+        "SINTUNE": 0.0,
+        "SINPHASE": 0.0
+    },
+    "TKICKER": {
+        "L": 0.0,
+        "HKICK": 0.0,
+        "VKICK": 0.0,
+        "TILT": 0.0,
+        "SINKICK": 0,
+        "SINPEAK": 0.0,
+        "SINTUNE": 0.0,
+        "SINPHASE": 0.0
+    },
+    "RFCAVITY": {
+        "L": 0.0,
+        "VOLT": 0.0,
+        "LAG": 0.0,
+        "FREQ": 0.0,
+        "HARMON": 0,
+        "N_BESSEL": 0,
+        "NO_CAVITY_TOTALPATH": false
+    },
+    "RFMULTIPOLE": {
+        "L": 0.0,
+        "VOLT": 0.0,
+        "LAG": 0.0,
+        "FREQ": 0.0,
+        "HARMON": 0,
+        "LRAD": 0.0,
+        "TILT": 0.0,
+        "KNL": [],
+        "KSL": [],
+        "PNL": [],
+        "PSL": []
+    },
+    "HACDIPOLE": {
+        "L": 0.0,
+        "VOLT": 0.0,
+        "FREQ": 0.0,
+        "LAG": 0.0,
+        "RAMP1": 0,
+        "RAMP2": 0,
+        "RAMP3": 0,
+        "RAMP4": 0
+    },
+    "HMONITOR": {
+        "L": 0.0
+    },
+    "VMONITOR": {
+        "L": 0.0
+    },
+    "MONITOR": {
+        "L": 0.0
+    }
+}

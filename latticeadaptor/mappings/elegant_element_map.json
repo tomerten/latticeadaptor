@@ -1,0 +1,15 @@
+{
+    "MONITOR": "MONI",
+    "MARKER": "MARK",
+    "HKICKER": "HKICK",
+    "VKICKER": "VKICK",
+    "KICKER": "KICKER",
+    "DRIFT": "DRIF",
+    "SBEND": "CSBEND",
+    "RBEND": "BEND",
+    "QUADRUPOLE": "KQUAD",
+    "SEXTUPOLE": "KSEXT",
+    "OCTUPOLE": "KOCT",
+    "MULTIPOLE": "MULT",
+    "RFCAVITY": "RFCA"
+}

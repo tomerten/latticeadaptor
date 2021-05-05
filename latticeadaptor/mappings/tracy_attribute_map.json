@@ -1,0 +1,22 @@
+{
+    "L": "L",
+    "ANGLE": "T",
+    "TILT": "Roll",
+    "HGAP": "Gap",
+    "E1": "T1",
+    "E2": "T2",
+    "K1": "K",
+    "K2": "K",
+    "K3": "K",
+    "VOLT": "Voltage",
+    "FREQ": "Frequency",
+    "PHASE": "phi",
+    "FINT": "fint",
+    "N_KICKS": "N",
+    "HARMON": "",
+    "NO_CAVITY_TOTALPATH": "",
+    "KMAX": "",
+    "KMIN": "",
+    "CALIB": "",
+    "KICK": ""
+}

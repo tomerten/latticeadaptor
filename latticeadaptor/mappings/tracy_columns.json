@@ -1,0 +1,35 @@
+{
+    "bpm": [],
+    "marker": [],
+    "drift": [
+        "L"
+    ],
+    "bend": [
+        "L",
+        "T",
+        "Roll",
+        "Gap",
+        "fint",
+        "T1",
+        "T2",
+        "K"
+    ],
+    "quad": [
+        "L",
+        "K"
+    ],
+    "sext": [
+        "L",
+        "K"
+    ],
+    "oct1": [
+        "L",
+        "K"
+    ],
+    "cavity": [
+        "L",
+        "Frequency",
+        "phi",
+        "Voltage"
+    ]
+}

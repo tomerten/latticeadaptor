@@ -1,0 +1,14 @@
+{
+    "MONITOR": "bpm",
+    "MARKER": "marker",
+    "HKICKER": "drift",
+    "VKICKER": "drift",
+    "KICKER": "drift",
+    "DRIFT": "drift",
+    "SBEND": "bend",
+    "RBEND": "bend",
+    "QUADRUPOLE": "quad",
+    "SEXTUPOLE": "sext",
+    "OCTUPOLE": "oct1",
+    "RFCAVITY": "cavity"
+}
