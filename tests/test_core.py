@@ -3,7 +3,7 @@
 
 """Tests for `latticeadaptor` package."""
 
-import latticeadaptor.mappings
+import latticeadaptor.core
 import pytest
 
 # ==============================================================================
@@ -11,7 +11,7 @@ import pytest
 # (normally all tests are run with pytest)
 # ==============================================================================
 if __name__ == "__main__":
-    # the_test_you_want_to_debug = test_greet
+    #    the_test_you_want_to_debug = test_greet
 
     #    the_test_you_want_to_debug()
     print("-*# finished #*-")
