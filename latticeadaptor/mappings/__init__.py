@@ -4,15 +4,10 @@
 Module latticeadaptor.mappings 
 =================================================================
 
-A module
+A module containing mappings between elements and attributes for the 
+different lattice formats used:
+* MadX
+* Elegant
+* Tracy
 
 """
-
-# your imports here ...
-
-def greet(to=''):
-	"""Say "Hello <to>!".
-	
-	:param str to: whom you want to say hello to.
-	"""
-	f"Hello {to}!"

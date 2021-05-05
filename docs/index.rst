@@ -9,6 +9,7 @@ Welcome to latticeadaptor's documentation!
    readme
    installation
    api
+   tutorials
    authors
    history
 

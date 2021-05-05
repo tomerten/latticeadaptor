@@ -52,7 +52,10 @@ with (BASE_DIR / "../mappings/tracy_attribute_map.json").open() as file:
 
 @v_args(inline=True)
 class AbstractSequenceFileTransformer(ABC, Transformer):
+    """Lark Transformer Class"""
+
     def transform(self, tree):
+        """Method to transform the parsed data"""
         self.elements = []
         self.seq = None
         self.name = None
