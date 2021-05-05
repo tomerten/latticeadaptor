@@ -837,7 +837,7 @@ def twissplot(
     """
     if cpymadtwiss:
         if beamlinegraph:
-            plot, ax = Beamlinegraph_from_seq(
+            plot, ax = Beamlinegraph_from_seq_file(
                 kwargs.get("sequence"),
                 offset_array=kwargs.get("offset_array", np.array([0.0, 0.0])),
                 start=kwargs.get("start", 0.0),
