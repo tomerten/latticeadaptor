@@ -163,8 +163,8 @@ def _parse_table_to_madx_definitions(df: pd.DataFrame) -> str:
     """
     Method to parse table to MADX sequence file definitions.
 
-        :param pd.DataFrame df: table to parse
-        :returns: Madx string for the element defintions.
+            :param pd.DataFrame df: table to parse
+            :returns: Madx string for the element defintions.
     """
     # init output
     text = """"""
@@ -217,10 +217,10 @@ def _parse_table_to_madx_sequence_part(name: str, length: float, df: pd.DataFram
     """
     Method to parse a table to the MADX sequence part.
 
-        :param str name: lattice name
-        :param float length: lattice length
-        :param pd.DataFrame df: table to parse
-        :returns: Madx sequence string with positions of the elements.
+            :param str name: lattice name
+            :param float length: lattice length
+            :param pd.DataFrame df: table to parse
+            :returns: Madx sequence string with positions of the elements.
     """
     # start the sequence definition
     text = "{}: SEQUENCE, L={};\n".format(name, length)
@@ -241,10 +241,10 @@ def parse_table_to_madx_sequence_string(name: str, length: float, df: pd.DataFra
     Method to parse table to MADX sequence.
 
 
-        :param str name: lattice name
-        :param float length: lattice length
-        :param pd.DataFrame df: table to parse
-        :returns: Madx sequence string
+            :param str name: lattice name
+            :param float length: lattice length
+            :param pd.DataFrame df: table to parse
+            :returns: Madx sequence string
 
     """
     # parse the element definitions
@@ -264,7 +264,7 @@ def parse_table_to_madx_sequence_file(
     :param str name: lattice name
     :param float length: lattice length
     :param pd.DataFrame df: table to parse
-        :param str filename: filename of the file
+            :param str filename: filename of the file
     """
     save_string(parse_table_to_madx_sequence_string(name, length, df), filename)
 
@@ -276,9 +276,9 @@ def parse_table_to_madx_install_str(name: str, df: pd.DataFrame) -> str:
     directly as MADX input string using MADX().input(str) from
     cpymad package.
 
-        :param str name: lattice name
-        :param pd.DataFrame df: table with elements to install
-        :returns: Madx install str
+            :param str name: lattice name
+            :param pd.DataFrame df: table with elements to install
+            :returns: Madx install str
     """
 
     # start sequence edit
@@ -301,9 +301,9 @@ def parse_table_to_madx_remove_str(name: str, df: pd.DataFrame) -> str:
     as MADX input string using MADX().input(str) from the cpymad
     package.
 
-        :param str name: lattice name
-        :param pd.DataFrame df: table with elements to remove
-        :returns: Madx remove string
+            :param str name: lattice name
+            :param pd.DataFrame df: table with elements to remove
+            :returns: Madx remove string
     """
     # start sequence edit
     text = "USE, SEQUENCE={};\n".format(name)
@@ -322,9 +322,9 @@ def parse_table_to_elegant_string(name: str, df: pd.DataFrame) -> str:
     """
     Method to transform the MADX seq table to an Elegant lte file.add()
 
-        :param str name: lattice name
-        :param pd.DataFrame df: table
-        :returns: elegant lattice string
+            :param str name: lattice name
+            :param pd.DataFrame df: table
+            :returns: elegant lattice string
     """
     # init output
     text = """"""
@@ -404,9 +404,9 @@ def parse_table_to_tracy_string(name: str, df: pd.DataFrame) -> str:
     """
     Method to transform the MADX seq table to tracy lattice string.
 
-        :param str name: lattice name
-        :param pd.DataFrame df: table
-        :returns: tracy lattice string
+            :param str name: lattice name
+            :param pd.DataFrame df: table
+            :returns: tracy lattice string
     """
 
     # init output

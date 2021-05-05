@@ -120,10 +120,9 @@ def dipole_split_angles_to_dict(
     :param str dipole_name: name of the dipole - same as name in dataframe used in split_dipoles as input - becomes key
     :param float dipole_len: length of the dipole
     :param float dipole_bend_angle_rad: bending angle of the dipole in rad
-            :param List[float] angle_list: list of splitting angles - from start of dipole -in deg
-            :param bool verbose: flag to print processing output
-            :returns: Dict containing split angles in rad and split lengths.
-    Main key is dipole name, sub keys are "length" and "angles".
+    :param List[float] angle_list: list of splitting angles - from start of dipole -in deg
+    :param bool verbose: flag to print processing output
+    :returns: Dict containing split angles in rad and split lengths. Main key is dipole name, sub keys are "length" and "angles".
     """
     _dict = {dipole_name: dict()}
 
@@ -184,11 +183,10 @@ def split_dipoles(df, _dict, halfbendangle):
     Method to split the dipole given in the
     dataframe according the data given in _dict.
 
-            :params pd.DataFrme df: seq table reduced to dipoles to split
-            :params dict _dict: output of dipole_split_angles_to_dict joined as dict for all
-            dipoles in df
-            :params float halfbendangle: half bending angle for the dipoles
-                            :returns: updated table with dipolse split
+        :params pd.DataFrme df: seq table reduced to dipoles to split
+        :params dict _dict: output of dipole_split_angles_to_dict joined as dict for all dipoles in df
+        :params float halfbendangle: half bending angle for the dipoles
+        :returns: updated table with dipolse split
     """
     # init output
     newdf = pd.DataFrame()
