@@ -12,7 +12,19 @@ A module containing the main class to operate on accelerator lattices.
 import queue
 from copy import deepcopy
 
-from .parsers import parse_from_madx_sequence_string
+from .parsers import (
+    _parse_table_to_madx_definitions,
+    parse_from_madx_sequence_file,
+    parse_from_madx_sequence_string,
+    parse_table_to_elegant_file,
+    parse_table_to_elegant_string,
+    parse_table_to_madx_install_str,
+    parse_table_to_madx_remove_str,
+    parse_table_to_madx_sequence_file,
+    parse_table_to_madx_sequence_string,
+    parse_table_to_tracy_file,
+    parse_table_to_tracy_string,
+)
 
 
 class LatticeAdaptor:
