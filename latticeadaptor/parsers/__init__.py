@@ -17,8 +17,6 @@ import pandas as pd
 from lark import Lark, Transformer, v_args
 from lark.exceptions import LarkError
 
-from ..utils import save_string
-
 BASE_DIR = Path(__file__).resolve().parent
 
 with (BASE_DIR / "../lark/Madx.lark").open() as file:
@@ -48,6 +46,16 @@ with (BASE_DIR / "../mappings/tracy_element_map.json").open() as file:
 
 with (BASE_DIR / "../mappings/tracy_attribute_map.json").open() as file:
     TO_TRACY_ATTR = load(file)
+
+
+def save_string(string, file):
+    """Quick method to save string to file.
+
+    :param str string: string to save to file
+    :param str file: filename of where to save the string
+    """
+    with open(file, "w") as f:
+        f.write(string)
 
 
 @v_args(inline=True)

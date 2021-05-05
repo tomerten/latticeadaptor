@@ -91,7 +91,7 @@ class LatticeAdaptor:
         Method to generate string input for madx
         to save the sequence.
 
-                :param str filename: file to parse to
+                        :param str filename: file to parse to
         """
         return "SAVE, SEQUENCE={}, file='{}';".format(self.name, filename)
 
@@ -163,7 +163,7 @@ class LatticeAdaptor:
 
         :param str filename: file to write to
         """
-        save_string(self.parse_table_to_madx_line(), filename)
+        save_string(self.parse_table_to_madx_line_string(), filename)
 
     def get_quad_strengths(self):
         """Method to return quadrupole strengths as a dict."""
@@ -186,10 +186,40 @@ class LatticeAdaptor:
         Method to load as strength dict to the table, col is the attribute where
         the strengths will be loaded to.
 
-                :param dict strdc: dictionary with strength settings
-                :param str col: column where the strengths need to be written to
+        :param dict strdc: dictionary with strength settings
+        :param str col: column where the strengths need to be written to
         """
         self.history.put((deepcopy(self.name), deepcopy(self.len), deepcopy(self.table)))
 
         for k, v in strdc.items():
             self.table.loc[self.table["name"] == k, col] = v
+
+    def compare_seq_center_positions(self, seqfile2):
+        """
+        Method to compare locations of elements in two
+        MADX sequence files.
+
+                :param str seqfile2: filename of second sequence
+                :returns: equal and diff dataframes
+        """
+        # assert os.path.isfile(seqfile1)
+        assert os.path.isfile(seqfile2)
+
+        # name1, len1, df1 = parse_from_madx_sequence_file(seqfile1)
+        name2, len2, df2 = parse_from_madx_sequence_file(seqfile2)
+
+        table1 = self.table[["name", "pos"]]
+        table2 = df2[["name", "pos"]]
+
+        eq = pd.merge(table1, table2, on=["pos"], how="inner")
+        diff = table1[~table1["pos"].isin(table2["pos"])]
+
+        return eq, diff
+
+	def undo(self):
+		 """Undo previous change."""
+        if not self.history.empty():
+            old = self.history.get()
+            self.name, self.length, self.table = old
+        else:
+            print("No previous states available")
