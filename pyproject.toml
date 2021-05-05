@@ -16,6 +16,8 @@ keywords = ['packaging', 'poetry']
 python = "^3.8"
 pandas = "^1.2.4"
 lark = "^0.11.3"
+matplotlib = "^3.4.1"
+termcolor = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.4.2"
