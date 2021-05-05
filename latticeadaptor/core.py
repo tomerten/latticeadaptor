@@ -91,7 +91,7 @@ class LatticeAdaptor:
         Method to generate string input for madx
         to save the sequence.
 
-                        :param str filename: file to parse to
+                                        :param str filename: file to parse to
         """
         return "SAVE, SEQUENCE={}, file='{}';".format(self.name, filename)
 
@@ -199,8 +199,8 @@ class LatticeAdaptor:
         Method to compare locations of elements in two
         MADX sequence files.
 
-                :param str seqfile2: filename of second sequence
-                :returns: equal and diff dataframes
+                        :param str seqfile2: filename of second sequence
+                        :returns: equal and diff dataframes
         """
         # assert os.path.isfile(seqfile1)
         assert os.path.isfile(seqfile2)
@@ -216,8 +216,8 @@ class LatticeAdaptor:
 
         return eq, diff
 
-	def undo(self):
-		 """Undo previous change."""
+    def undo(self):
+        """Undo previous change."""
         if not self.history.empty():
             old = self.history.get()
             self.name, self.length, self.table = old
