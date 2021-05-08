@@ -174,7 +174,7 @@ provides a method to check which elements center positions are the same and whic
     la.compare_seq_center_positions('lattice2.seq')
 
 Another common thing to do is to compare element settings for different lattices. Once the
-settings are extraced (for example by the ``get_quad_strengths`` or by using pandas DataFrame
+settings are extraced (for example by the :meth:`~get_quad_strengths` or by using pandas DataFrame
 filtering and extraction on the lattice table) one can compare them with:
 
 .. code-block:: python
@@ -192,7 +192,7 @@ filtering and extraction on the lattice table) one can compare them with:
     below the threshold will be in orange.
 
 
-The ``Beamlinegraph_compare_from_seq_files`` allows for a graphical check of the 
+The :meth:`~Beamlinegraph_compare_from_seq_files` allows for a graphical check of the 
 alignment of the lattice elements.
 
 .. plot::
@@ -267,6 +267,11 @@ alignment of the lattice elements.
 The implemented twiss plot method currently only works with a twiss object produced 
 by running the Twiss command using `cpymad <https://github.com/hibtc/cpymad>`_.
 
+.. note::
+
+    If you use the beamlinegraph option, one also needs to provide a filename containing
+    the Madx sequence (TODO: change to extract from Twiss directly).
+
 .. plot:: 
 
     from latticeadaptor.utils import twissplot
@@ -276,9 +281,9 @@ by running the Twiss command using `cpymad <https://github.com/hibtc/cpymad>`_.
     madx.call(file='fodo.seq')
     madx.use(sequence='FODO')
     twiss = madx.twiss()
-    twissplot(twiss)
+    twissplot(twiss, cols=["betx", "bety", "dx"], beamlinegraph=True, sequence='fodo.seq',offset_array = np.array([0.0,7.0]), anno=True)
 
-7. More advanced editing
+1. More advanced editing
 ========================
 
 At light sources one often needs to split the dipoles to insert markers for the 
@@ -306,7 +311,7 @@ This dictionary can now be used to update the table.
 8. Undo
 =======
 
-Sometimes we make mistakes, do not worry there is an ``undo`` method.
+Sometimes we make mistakes, do not worry there is an :meth:`~yndo` method.
 
 .. code-block:: python
 
