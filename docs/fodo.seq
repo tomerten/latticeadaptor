@@ -1,4 +1,4 @@
-QF              : QUADRUPOLE  , L:=0.5, K1:=1.0, ANGLE=0.0;
+QF              : QUADRUPOLE  , L:=0.5, K1:=1.0;
 D1              : DRIFT       , L:=1.0;
 QD              : QUADRUPOLE  , L:=1.0, K1:=-1.0;
 D2              : DRIFT       , L:=1.0;
