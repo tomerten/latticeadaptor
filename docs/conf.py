@@ -39,6 +39,7 @@ import latticeadaptor
 #             , 'sphinx_click.ext'
 #             ]
 extensions = [
+    "matplotlib.sphinxext.mathmpl",
     "matplotlib.sphinxext.plot_directive",
     # "matplotlib.sphinxext.only_directives",
     # "IPython.sphinxext.ipython_directive",
