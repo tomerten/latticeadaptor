@@ -658,7 +658,7 @@ def Beamlinegraph_from_seq_file(
     # determine max plot heights
     if any(i in element_families for i in _RECTANGLE_ELEMENTS):
         angle_max = 0.0
-        if ("ANGLE" not in table.columsn) or not all(table.ANGLE.isna()):
+        if ("ANGLE" not in table.columns) or not all(table.ANGLE.isna()):
             angle_max = abs(table.ANGLE.max())
 
     if "QUADRUPOLE" in element_families:
