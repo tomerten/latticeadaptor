@@ -23,3 +23,9 @@ Features
 * Quick twiss plotting.
 * Quick lattice element plotting.
 * Conversion from table to standard formats.
+
+
+.. |Docs Badge| image:: https://readthedocs.org/projects/latticeadaptor/badge/
+    :alt: Documentation Status
+    :scale: 100%
+    :target: http://latticeadaptor.readthedocs.io
