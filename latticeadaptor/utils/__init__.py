@@ -42,9 +42,9 @@ def rotate(l, n):
     """
     Method to rotate a list.
 
-            :param list l: list to rotate
-            :param int  n: number of elements to rotate over
-            :returns: rotated list
+                    :param list l: list to rotate
+                    :param int  n: number of elements to rotate over
+                    :returns: rotated list
     """
     return l[-n:] + l[:-n]
 
@@ -54,7 +54,7 @@ def delete_first_line(file):
     Method to delete first line in a file.
     Used to delete first line of SAVE SEQUENCE output of madx.
 
-            :param str file: file of which to delete first line
+                    :param str file: file of which to delete first line
     """
     with open(file, "r") as fin:
         data = fin.read().splitlines(True)
@@ -183,10 +183,10 @@ def split_dipoles(df, _dict, halfbendangle):
     Method to split the dipole given in the
     dataframe according the data given in _dict.
 
-        :params pd.DataFrme df: seq table reduced to dipoles to split
-        :params dict _dict: output of dipole_split_angles_to_dict joined as dict for all dipoles in df
-        :params float halfbendangle: half bending angle for the dipoles
-        :returns: updated table with dipolse split
+            :params pd.DataFrme df: seq table reduced to dipoles to split
+            :params dict _dict: output of dipole_split_angles_to_dict joined as dict for all dipoles in df
+            :params float halfbendangle: half bending angle for the dipoles
+            :returns: updated table with dipolse split
     """
     # init output
     newdf = pd.DataFrame()
@@ -290,9 +290,9 @@ def compare_settings_dicts(dc1, dc2, threshold=1):
     Method to compare lattice settings dicts
     extracted from json lattice files or tables.
 
-            :param dict dc1: dict of lattice 1
-            :param dict dc2: dict of lattice 2
-            :param float threshold: threshold to show traffic light colors
+                    :param dict dc1: dict of lattice 1
+                    :param dict dc2: dict of lattice 2
+                    :param float threshold: threshold to show traffic light colors
     """
     combinedc = defaultdict(list)
     for k, v in chain(dc1.items(), dc2.items()):
@@ -348,9 +348,9 @@ def install_start_end_marker(name: str, length: float) -> str:
     """
     Method to add end marker.
 
-        :param str name: lattice name
-        :param float length: lattice length
-        :returns: Madx install str for start and end marker
+            :param str name: lattice name
+            :param float length: lattice length
+            :returns: Madx install str for start and end marker
     """
     # define  start and end marker
     text = "{:12}: {:12};\n".format("MSTART", "MARKER")
@@ -428,13 +428,13 @@ def Beamlinegraph_compare_from_seq_files(seqfile1, seqfile2, start=0.0, stop=Non
     Arguments:
     ----------
     seqfile1    : str
-        input seqfile 1
+            input seqfile 1
     seqfile2    : str
-        input seqfile 2
+            input seqfile 2
     start       :
-        s location of start
+            s location of start
     stop        :
-        s location of stop
+            s location of stop
 
     """
     _REQUIRED_COLUMNS = ["pos", "name", "L"]
@@ -657,7 +657,9 @@ def Beamlinegraph_from_seq_file(
 
     # determine max plot heights
     if any(i in element_families for i in _RECTANGLE_ELEMENTS):
-        angle_max = abs(table.ANGLE.max())
+        angle_max = 0.0
+        if not all(table.ANGLE.isna()):
+            angle_max = abs(table.ANGLE.max())
 
     if "QUADRUPOLE" in element_families:
         k_max = abs(table.K1.max())

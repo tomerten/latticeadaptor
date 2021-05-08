@@ -205,6 +205,11 @@ alignment of the lattice elements.
 6. Element Plotting Example
 ===========================
 
+.. note::
+
+    The relative size of the elements in the plots below is a representation of
+    their relative strength settings. 
+
 6.1 FODO
 --------
 
@@ -213,7 +218,7 @@ alignment of the lattice elements.
     from latticeadaptor.core import LatticeAdaptor
     from latticeadaptor.utils import Beamlinegraph_from_seq_file
     madxseqsymm = """
-    QF : QUADRUPOLE, L := 0.50 , K1 :=  1.00, ANGLE := 0.0;
+    QF : QUADRUPOLE, L := 0.50 , K1 :=  1.00;
     QD : QUADRUPOLE, L := 1.00 , K1 := -1.00;
     D1 : DRIFT, L := 1.00;
     D2 : DRIFT, L := 1.00;
@@ -242,7 +247,7 @@ alignment of the lattice elements.
     madxseqsymm = """
     QF: QUADRUPOLE, L=0.5,K1=0.2; 
     QD: QUADRUPOLE, L=1.0,K1=-0.2; 
-    B: SBEND, L=1.0,ANGLE=15.0; 
+    B: SBEND, L=1.0, ANGLE=15.0; 
     FODO: SEQUENCE, L=12.0;
     QF, at = 0.25;
     B,  at = 3.00;
@@ -266,6 +271,12 @@ by running the Twiss command using `cpymad <https://github.com/hibtc/cpymad>`_.
 
     from latticeadaptor.utils import twissplot
     from cpymad.madx import Madx
+    madx = Madx(stdout=False)
+    madx.command.beam(particle='electron',energy=1.7)
+    madx.call(file='fodo.seq')
+    madx.use(sequence='FODO')
+    twiss = madx.twiss()
+
 
 7. More advanced editing
 ========================
