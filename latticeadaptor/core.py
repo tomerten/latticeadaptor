@@ -35,20 +35,21 @@ class LatticeAdaptor:
         self.history = queue.LifoQueue()
         self.name = kwargs.get("name", None)
         self.len = kwargs.get("len", 0.0)
+        self._table = None
         self.table = kwargs.get("table", None)
         self.filename = kwargs.get("file", None)
         self.inputstr = kwargs.get("string", None)
 
     @property
     def table(self):
-        return self.table
+        return self._table
 
     @table.setter
     def table(self, value):
         # roll back
         self.history.put((deepcopy(self.name), deepcopy(self.len), deepcopy(self.table)))
 
-        self.table = value
+        self._table = value
 
     def load_from_madx_sequence_string(self, string: str) -> None:
         """Load lattice from sequence as string
@@ -113,7 +114,7 @@ class LatticeAdaptor:
         Method to generate string input for madx
         to save the sequence.
 
-                                                                        :param str filename: file to parse to
+                                                                                                                                        :param str filename: file to parse to
         """
         return "SAVE, SEQUENCE={}, file='{}';".format(self.name, filename)
 
@@ -221,8 +222,8 @@ class LatticeAdaptor:
         Method to compare locations of elements in two
         MADX sequence files.
 
-                                        :param str seqfile2: filename of second sequence
-                                        :returns: equal and diff dataframes
+                                                                        :param str seqfile2: filename of second sequence
+                                                                        :returns: equal and diff dataframes
         """
         # assert os.path.isfile(seqfile1)
         assert os.path.isfile(seqfile2)
