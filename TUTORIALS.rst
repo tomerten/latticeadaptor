@@ -283,7 +283,7 @@ by running the Twiss command using `cpymad <https://github.com/hibtc/cpymad>`_.
     twiss = madx.twiss()
     twissplot(twiss, cols=["betx", "bety", "dx"], beamlinegraph=True, sequence='fodo.seq',offset_array = np.array([0.0,7.0]), anno=True)
 
-1. More advanced editing
+7. More advanced editing
 ========================
 
 At light sources one often needs to split the dipoles to insert markers for the 
