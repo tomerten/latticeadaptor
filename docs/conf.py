@@ -94,7 +94,8 @@ pygments_style = "sphinx"
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
-# plot_include_source = True
+plot_include_source = True
+nofigs = False
 # -- Options for HTML output -------------------------------------------
 plot_formats = ["png", "hires.png", "pdf", "svg"]
 # The theme to use for HTML and HTML Help pages.  See the documentation for
