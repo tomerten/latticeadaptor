@@ -41,8 +41,8 @@ import latticeadaptor
 extensions = [
     "matplotlib.sphinxext.plot_directive",
     # "matplotlib.sphinxext.only_directives",
-    "IPython.sphinxext.ipython_directive",
-    "IPython.sphinxext.ipython_console_highlighting",
+    # "IPython.sphinxext.ipython_directive",
+    # "IPython.sphinxext.ipython_console_highlighting",
     "sphinx.ext.mathjax",
     "sphinx.ext.autodoc",
     "sphinx.ext.doctest",
@@ -93,7 +93,7 @@ pygments_style = "sphinx"
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
-plot_include_source = True
+plot_include_source
 # -- Options for HTML output -------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
