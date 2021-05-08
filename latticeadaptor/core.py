@@ -31,14 +31,13 @@ class LatticeAdaptor:
     """Class to convert lattices."""
 
     def __init__(self, **kwargs):
+        # roll back
+        self.history = queue.LifoQueue()
         self.name = kwargs.get("name", None)
         self.len = kwargs.get("len", 0.0)
         self.table = kwargs.get("table", None)
         self.filename = kwargs.get("file", None)
         self.inputstr = kwargs.get("string", None)
-
-        # roll back
-        self.history = queue.LifoQueue()
 
     @property
     def table(self):

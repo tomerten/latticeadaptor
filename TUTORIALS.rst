@@ -20,7 +20,7 @@ Loading a lattice from a Madx sequence string.
 
     from latticeadaptor.core import LatticeAdaptor
     latticestring = """
-    QF : QUADRUPOLE, L := 0.50 , K1 :=  1.00, ANGLE := 0.0;
+    QF : QUADRUPOLE, L := 0.50 , K1 :=  1.00;
     QD : QUADRUPOLE, L := 1.00 , K1 := -1.00;
     D1 : DRIFT, L := 1.00;
     D2 : DRIFT, L := 1.00;
@@ -57,7 +57,7 @@ Loading manually a lattice name, lattice length and lattice table.
     la.len   = latticelen
     la.table = latticetable
 
-3. Saving lattices - converting
+2. Saving lattices - converting
 ===============================
 
 3.1 Madx
@@ -276,7 +276,7 @@ by running the Twiss command using `cpymad <https://github.com/hibtc/cpymad>`_.
     madx.call(file='fodo.seq')
     madx.use(sequence='FODO')
     twiss = madx.twiss()
-
+    twissplot(twiss)
 
 7. More advanced editing
 ========================
