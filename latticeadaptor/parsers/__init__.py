@@ -14,6 +14,7 @@ from json import load
 from pathlib import Path
 from typing import Tuple
 
+import numpy as np
 import pandas as pd
 from lark import Lark, Transformer, v_args
 from lark.exceptions import LarkError

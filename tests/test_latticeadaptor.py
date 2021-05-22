@@ -44,7 +44,7 @@ table_to_seq = [
 
 
 def test_version():
-    assert latticeadaptor.__version__ == "0.2.0"
+    assert latticeadaptor.__version__ == "0.3.0"
 
 
 @pytest.mark.parametrize("string, expected_name, expected_len, expected_df", seq_str_test)
