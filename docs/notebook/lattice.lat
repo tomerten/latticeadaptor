@@ -1,0 +1,13 @@
+QF: Quadrupole, L = 0.500000, K = 1.000000, N = Nquad, Method = 4;
+D1: Drift, L = 1.0;
+QD: Quadrupole, L = 1.000000, K = -1.000000, N = Nquad, Method = 4;
+D2: Drift, L = 1.0;
+
+
+FODO: QF, D1, QD, D2, QF;
+
+ring: FODO;
+
+cell: ring, symmetry = 1;
+
+end;

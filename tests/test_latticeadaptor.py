@@ -44,7 +44,7 @@ table_to_seq = [
 
 
 def test_version():
-    assert latticeadaptor.__version__ == "0.1.0"
+    assert latticeadaptor.__version__ == "0.2.0"
 
 
 @pytest.mark.parametrize("string, expected_name, expected_len, expected_df", seq_str_test)
@@ -63,18 +63,6 @@ def test_parse_to_madx_seqeunce_string(name, df, length, string):
     assert string == newstring
 
 
-def test_hello_noargs():
-    """Test for latticeadaptor.hello()."""
-    s = latticeadaptor.hello()
-    assert s == "Hello world"
-
-
-def test_hello_me():
-    """Test for latticeadaptor.hello('me')."""
-    s = latticeadaptor.hello("me")
-    assert s == "Hello me"
-
-
 # ==============================================================================
 # The code below is for debugging a particular test in eclipse/pydev.
 # (otherwise all tests are normally run with pytest)
@@ -82,7 +70,7 @@ def test_hello_me():
 # that the source directory is on the path
 # ==============================================================================
 if __name__ == "__main__":
-    the_test_you_want_to_debug = test_hello_noargs
+    the_test_you_want_to_debug = test_parse_to_madx_seqeunce_string
 
     print("__main__ running", the_test_you_want_to_debug)
     the_test_you_want_to_debug()

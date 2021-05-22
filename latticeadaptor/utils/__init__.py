@@ -8,17 +8,23 @@ A module containg some helper functions.
 
 """
 
-import os
-from typing import List
+from typing import List, Tuple, Union
 
 import pandas as pd
 
 
-def is_number(s):
+def is_number(s: str) -> bool:
     """Method to check if a value is a number or not.
 
-    :param str s: string to test
-    :returns: True or False
+    Parameters
+    ----------
+    s : str
+        string to test
+
+    Returns
+    -------
+    bool
+        true or false
     """
     try:
         float(s)
@@ -27,34 +33,51 @@ def is_number(s):
         return False
 
 
-def filter_family(df, fam):
-    """Filter dataframe by family name.
+def filter_family(df: pd.DataFrame, fam: str) -> pd.DataFrame:
+    """Filter the dataframe by family name.
 
-    :param pd.DataFrame df: original dataframe to filter
-    :param str fam: family string to filter on
-    :returns: filtered pd.DataFrame
+    Parameters
+    ----------
+    df : pd.DataFrame
+        dataframe to filter
+    fam : str
+        family to filter on
+
+    Returns
+    -------
+    pd.DataFrame
+        copy of filtered dataframe
     """
     _filter = df.family == fam
+
     return df.loc[_filter].copy().reset_index(drop=True)
 
 
-def rotate(l, n):
-    """
-    Method to rotate a list.
+def rotate(l: list, n: int) -> list:
+    """Method to rotate elements in a list.
 
-                                                                    :param list l: list to rotate
-                                                                    :param int  n: number of elements to rotate over
-                                                                    :returns: rotated list
+    Parameters
+    ----------
+    l : list
+        input list
+    n : int
+        number of element to rotate over
+
+    Returns
+    -------
+    list
+        rotated list
     """
     return l[-n:] + l[:-n]
 
 
-def delete_first_line(file):
-    """
-    Method to delete first line in a file.
-    Used to delete first line of SAVE SEQUENCE output of madx.
+def delete_first_line(file: str):
+    """Method to delete the first line in a file.
 
-                                                                    :param str file: file of which to delete first line
+    Parameters
+    ----------
+    file : str
+        filename
     """
     with open(file, "r") as fin:
         data = fin.read().splitlines(True)
@@ -62,15 +85,28 @@ def delete_first_line(file):
         fout.writelines(data[1:])
 
 
-def highlight_cells(data, _list=[], color="yellow"):
-    """Highlight cells in a dataframe with a given color.
+def highlight_cells(
+    data: pd.DataFrame, _list: list = [], color: str = "yellow"
+) -> Union[pd.DataFrame, list]:
+    """Method that can be used by pd.style.apply for styling single cells.
 
-    :param pd.DataFrame data: dataframe to highlight
-    :param list _list: list of values to highlight
-    :param str color: color to use for highlighting [yellow]
-    :returns: a styled pd.DataFrame
+    Parameters
+    ----------
+    data : pd.DataFrame
+        input dataframe
+    _list : list, optional
+        selection value list, by default []
+    color : str, optional
+        color to use to highlight, by default "yellow"
+
+    Returns
+    -------
+    Union[pd.DataFrame, list]
+        list or dataframe to be used by the style.apply method of pandas
     """
     attr = "background-color: {}".format(color)
+
+    # series of dataframe
     if data.ndim == 1:
         is_sel = data.isin(_list)
         return [attr if v else "" for v in is_sel]
@@ -79,22 +115,33 @@ def highlight_cells(data, _list=[], color="yellow"):
         return pd.DataFrame(np.where(is_sel, attr, ""), index=data.index, columns=data.columns)
 
 
-def highlight_row(data, _list, column, color="yellow"):
-    """Highlight rows in a dataframe with a given color.
+def highlight_row(data: pd.DataFrame, _list: list, column: str, color: str = "yellow") -> list:
+    """Method to highlight rows in a dataframe with a given color.
 
-    :param pd.DataFrame data: dataframe to highlight
-    :param list _list: list of values to highlight
-    :param list column: column to look for the values
-    :param str color: color to use for highlighting [yellow]
-    :returns: a styled pd.DataFrame
+    Parameters
+    ----------
+    data : pd.DataFrame
+        input dataframe
+    _list : list
+        selection list
+    column : str
+        column to apply selection to
+    color : str, optional
+        color to use, by default "yellow"
+
+    Returns
+    -------
+    list
+        list to be used by the style.apply method of pandas
     """
     attr = "background-color: {}".format(color)
     is_sel = pd.Series(data=False, index=data.index)
     is_sel[column] = data.loc[column].isin(_list)
+
     return [attr if is_sel.any() else "" for v in is_sel]
 
 
-def display_more(df, maxrows=300, maxcols=100):
+def display_more(df: pd.DataFrame, maxrows: int = 300, maxcols: int = 100):
     """
     Show more rows and columns of a dataframe.
     """
@@ -106,23 +153,38 @@ def display_more(df, maxrows=300, maxcols=100):
 # Lattice tools
 # ==============================================================================
 def dipole_split_angles_to_dict(
-    dipole_name, dipole_len, dipole_bend_angle_rad, angle_list, verbose=True
-):
-    """
-    Method to generate a dictionary that is used by the split_dipoles method
-    to split the dipoles over the angle list given in angle_list.
-    Verbose allows to print the output for debugging.
+    dipole_name: str,
+    dipole_len: float,
+    dipole_bend_angle_rad: float,
+    angle_list: list,
+    verbose: bool = True,
+) -> dict:
+    """Method to generate a dictionary that is used by the `split_dipoles` method to split
+    the dipoles over the angle list given in the input. Verbose allows to print the output
+    for debugging.
+
+    Parameters
+    ----------
+    dipole_name : str
+        dipole name of the dipole to be split
+    dipole_len : float
+        dipole length
+    dipole_bend_angle_rad : float
+        dipole bending angle
+    angle_list : list
+        list of angles to split over
+    verbose : bool, optional
+        print output, by default True
+
+    Returns
+    -------
+    dict
+        Dictionary containing the split angles in rad and split lengths. Main key is the dipole name, subkeys are
+        'lengths' and 'angles'
 
     IMPORTANT NOTE:
     ---------------
     Auto adds half angle split and final angle for full magnet.
-
-    :param str dipole_name: name of the dipole - same as name in dataframe used in split_dipoles as input - becomes key
-    :param float dipole_len: length of the dipole
-    :param float dipole_bend_angle_rad: bending angle of the dipole in rad
-    :param List[float] angle_list: list of splitting angles - from start of dipole -in deg
-    :param bool verbose: flag to print processing output
-    :returns: Dict containing split angles in rad and split lengths. Main key is dipole name, sub keys are "length" and "angles".
     """
     _dict = {dipole_name: dict()}
 
@@ -178,15 +240,22 @@ def dipole_split_angles_to_dict(
     return _dict
 
 
-def split_dipoles(df, _dict, halfbendangle):
-    """
-    Method to split the dipole given in the
-    dataframe according the data given in _dict.
+def split_dipoles(df: pd.DataFrame, _dict: dict, halfbendangle: float) -> pd.DataFrame:
+    """Method to split the dipole given in the input.
 
-                                    :params pd.DataFrme df: seq table reduced to dipoles to split
-                                    :params dict _dict: output of dipole_split_angles_to_dict joined as dict for all dipoles in df
-                                    :params float halfbendangle: half bending angle for the dipoles
-                                    :returns: updated table with dipolse split
+    Parameters
+    ----------
+    df : pd.DataFrame
+        input table of dipoles
+    _dict : dict
+        splitting dictionary
+    halfbendangle : float
+        half bend angle of the dipole to split
+
+    Returns
+    -------
+    pd.DataFrame
+        update table with the dipole split.
     """
     # init output
     newdf = pd.DataFrame()
@@ -197,7 +266,7 @@ def split_dipoles(df, _dict, halfbendangle):
         angles = _dict[row["name"]]["angles"]
 
         # calculate the center positions of the splits
-        end_pos = lengths.cumsum() + row.pos - row.L / 2
+        end_pos = lengths.cumsum() + row["at"] - row.L / 2
         center_pos = end_pos - (lengths / 2)
 
         # count splits per magnet
@@ -221,8 +290,7 @@ def split_dipoles(df, _dict, halfbendangle):
             markerrow = row.copy()
             markerrow.family = "MARKER"
             markerrow.L = 0.000000
-            markerrow = markerrow.drop(labels=["E1", "E2", "K1", "K2", "ANGLE"])
-
+            markerrow = markerrow.drop(labels=["E1", "E2", "K1", "K2", "ANGLE"], errors="ignore")
             # naming
             # beam ports A in first half of the magnet
             # beam ports B in second half of the magnet
@@ -261,11 +329,15 @@ def split_dipoles(df, _dict, halfbendangle):
 
             # updating center position
             newrow.pos = pos
-            markerrow.pos = pos + l / 2
+            markerrow["pos"] = pos + l / 2
 
             # if at is already in columns update it
             if "at" in newrow.index:
                 newrow["at"] = pos
+
+            # if at is already in columns update it
+            if "at" in markerrow.index:
+                markerrow["at"] = markerrow["pos"]
 
             # update E1 E2
             if i != 0:
@@ -285,14 +357,17 @@ def split_dipoles(df, _dict, halfbendangle):
     return newdf.reset_index(drop=True)
 
 
-def compare_settings_dicts(dc1, dc2, threshold=1):
-    """
-    Method to compare lattice settings dicts
-    extracted from json lattice files or tables.
+def compare_settings_dicts(dc1: dict, dc2: dict, threshold: float = 1.0) -> None:
+    """Method to compare lattice setting dicts.
 
-                                                                    :param dict dc1: dict of lattice 1
-                                                                    :param dict dc2: dict of lattice 2
-                                                                    :param float threshold: threshold to show traffic light colors
+    Parameters
+    ----------
+    dc1 : dict
+        settings in first lattice
+    dc2 : dict
+        settings in second lattice
+    threshold : float, optional
+        threshold to use for issuing warnings, by default 1.0
     """
     combinedc = defaultdict(list)
     for k, v in chain(dc1.items(), dc2.items()):
@@ -320,7 +395,10 @@ def compare_settings_dicts(dc1, dc2, threshold=1):
 def print_twiss_summ(tw):
     """Method to pretty print madx twiss summary generated by cpymadx
 
-    :param object tw: twiss object produced by cpymadx
+    Parameters:
+    -----------
+    tw : cpymad twiss object
+        twiss
     """
     from pprint import pprint
 
@@ -345,12 +423,19 @@ def print_twiss_summ(tw):
 # MADX tools
 # ==============================================================================
 def install_start_end_marker(name: str, length: float) -> str:
-    """
-    Method to add end marker.
+    """Method to add start and end marker to the lattice.
 
-                                    :param str name: lattice name
-                                    :param float length: lattice length
-                                    :returns: Madx install str for start and end marker
+    Parameters
+    ----------
+    name : str
+        lattice name
+    length : float
+        length of the lattice
+
+    Returns
+    -------
+    str
+        MADX install string.
     """
     # define  start and end marker
     text = "{:12}: {:12};\n".format("MSTART", "MARKER")
@@ -419,23 +504,27 @@ def draw_brace(ax, xspan, text, yshift=0.0):
     ax.text((xmax + xmin) / 2.0, ymin + 0.07 * yspan, text, ha="center", va="bottom")
 
 
-def Beamlinegraph_compare_from_seq_files(seqfile1, seqfile2, start=0.0, stop=None):
-    """
-    Method to compare location of beam line elements,
-    where the positions are extracted from a MADX
-    sequence file.
+def Beamlinegraph_compare_from_seq_files(
+    seqfile1: str, seqfile2: str, start: float = 0.0, stop: Union[float, None] = None
+):
+    """Method to compare the location of beam line elements where the positions
+    are extracted from MADX sequence files.
 
-    Arguments:
+    Parameters
     ----------
-    seqfile1    : str
-                                    input seqfile 1
-    seqfile2    : str
-                                    input seqfile 2
-    start       :
-                                    s location of start
-    stop        :
-                                    s location of stop
+    seqfile1 : str
+        sequence file 1
+    seqfile2 : str
+        sequence file 2
+    start : float, optional
+        start postion for plotting, by default 0.0
+    stop : [type], optional
+        end position for plotting, by default Union[float, None]
 
+    Returns:
+    --------
+    Tuple
+        pyplot obj and ax obj
     """
     _REQUIRED_COLUMNS = ["pos", "name", "L"]
     _RECTANGLE_ELEMENTS = [
@@ -627,8 +716,35 @@ def Beamlinegraph_compare_from_seq_files(seqfile1, seqfile2, start=0.0, stop=Non
 
 
 def Beamlinegraph_from_seq_file(
-    seqfile, start=0.0, stop=None, offset_array=[0.0, 0.0], anno=True, size=(12, 6)
+    seqfile: str,
+    start: float = 0.0,
+    stop: Union[float, None] = None,
+    offset_array: Union[list, np.array] = [0.0, 0.0],
+    anno: bool = True,
+    size: Tuple[int] = (12, 6),
 ):
+    """Method to generate beam line graph plot from MADX seq file.
+
+    Parameters
+    ----------
+    seqfile : str
+        MADX sequence file
+    start : float, optional
+        start position of the plot, by default 0.0
+    stop : Union[float, None], optional
+        end position of the plot, by default None
+    offset_array : Union[list, np.array], optional
+        beamline graph offset, by default [0.0, 0.0]
+    anno : bool, optional
+        annotate elements, by default True
+    size : Tuple[int], optional
+        plotsize, by default (12, 6)
+
+    Returns
+    -------
+    Tuple
+        pyplot obj and ax obj
+    """
     _REQUIRED_COLUMNS = ["pos", "name", "L"]
     _RECTANGLE_ELEMENTS = ["SBEND", "RBEND", "KICKER", "VKICKER", "HKICKER", "DRIFT"]
     _MIN_HEIGTH = 0.1
@@ -729,6 +845,16 @@ def Beamlinegraph_from_seq_file(
                 mpatches.RegularPolygon(
                     np.array([row.pos, 0.0]) + offset_array,
                     6,
+                    row.L / 2,
+                    color="#FF99FF",
+                    alpha=1.0,
+                )
+            )
+        elif row.family in ["OCTUPOLE"]:
+            axis.add_patch(
+                mpatches.RegularPolygon(
+                    np.array([row.pos, 0.0]) + offset_array,
+                    8,
                     row.L / 2,
                     color="#FF99FF",
                     alpha=1.0,

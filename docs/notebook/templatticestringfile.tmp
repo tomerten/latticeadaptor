@@ -1,0 +1,9 @@
+
+QF : QUADRUPOLE, L := 0.50 , K1 :=  1.00;
+QD : QUADRUPOLE, L := 0.75 , K1 := -1.00;
+
+FODO: SEQUENCE, L=4.00;
+QF, at = 0.25;
+QD, at = 2.00;
+QF, at = 3.75;
+ENDSEQUENCE;

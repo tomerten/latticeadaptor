@@ -1,0 +1,10 @@
+QF              : QUADRUPOLE  , L:=0.5, K1:=0.2;
+B               : SBEND       , L:=1.0, ANGLE:=15.0, E1:=7.5, E2:=7.5;
+QD              : QUADRUPOLE  , L:=1.0, K1:=-0.2;
+FODO: SEQUENCE, L=12.0;
+QF         , at =     0.250000;
+B          , at =     3.000000;
+QD         , at =     6.000000;
+B          , at =     9.000000;
+QF         , at =    11.750000;
+ENDSEQUENCE;

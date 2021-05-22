@@ -9,9 +9,9 @@ Welcome to latticeadaptor's documentation!
    readme
    installation
    api
-   tutorials
    authors
    history
+   notebook/Tutorial.ipynb
 
 ##################
 Indices and tables

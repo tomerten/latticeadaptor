@@ -12,10 +12,16 @@ A module containg accelerator lattice parsers for converting between formats.
 from abc import ABC
 from json import load
 from pathlib import Path
+from typing import Tuple
 
 import pandas as pd
 from lark import Lark, Transformer, v_args
 from lark.exceptions import LarkError
+
+# ==============================================================================
+# SET BASE DIR
+# LOAD MAPPINGS BETWEEN THE DIFFERENT FORMATS
+# ==============================================================================
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -48,11 +54,15 @@ with (BASE_DIR / "../mappings/tracy_attribute_map.json").open() as file:
     TO_TRACY_ATTR = load(file)
 
 
-def save_string(string, file):
-    """Quick method to save string to file.
+def save_string(string: str, file: str) -> None:
+    """Quick method to save string to file.add()
 
-    :param str string: string to save to file
-    :param str file: filename of where to save the string
+    Parameters
+    ----------
+    string : str
+        String to be saved to file.add()
+    file : str
+        filename where to save the string
     """
     with open(file, "w") as f:
         f.write(string)
@@ -109,7 +119,109 @@ class MADXTransformer(AbstractSequenceFileTransformer):
     pass
 
 
-def parse_from_madx_sequence_string(string: str) -> (str, float, pd.DataFrame):
+from typing import Tuple, Union
+
+from latticeconstructor.parse import parse_elegant, parse_madx
+from latticejson.convert import FROM_ELEGANT, TO_MADX
+
+_CONVERSION_DICT = {
+    "KQUAD": "QUADRUPOLE",
+    "KSEXT": "SEXTUPOLE",
+    "DRIF": "DRIFT",
+    "RFCA": "RFCAVITY",
+    "CSBEND": "SBEND",
+    "MONI": "MONITOR",
+    "WATCH": "MARKER",
+    "EVKICK": "VKICKER",
+    "EHKICK": "HKICKER",
+    "MARK": "MARKER",
+}
+
+
+def parse_from_string(string: str, ftype: str = "lte") -> Tuple[Union[str, None], dict, list]:
+    """Method to parse an elegant lattice string to name, defintions and ordered
+    lattice element list.
+
+    Parameters
+    ----------
+    string : str
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Lattice string.
+
+    ftype: optional, str, default = 'lte'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    format type
+
+    Returns
+    -------
+    Tuple[Union[str,None],dict, list]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    name, element definitions dict, element ordered list
+
+    """
+    assert ftype.lower() in ["lte", "madx"]
+
+    # use latticejson parser
+    if ftype == "lte":
+        latdata = parse_elegant(string)
+    else:
+        latdata = parse_madx(string)
+
+    # create command dict for later use
+    cdict = {}
+    for command in latdata.get("commands"):
+        try:
+            cdict[command[0]] = command[1] if len(command[1]) == 1 else list(command[1])
+        except Exception:
+            cdict[command[0]] = ""
+
+    # get the element definitions dict
+    definitions = latdata.get("elements", [])
+
+    # convert to madx names
+    definitions = {}
+    for name, (_type, attributes) in latdata.get("elements", []).items():
+        madtype = _type.upper()
+        if ftype == "lte":
+            # if no matching type make a marker
+            try:
+                madtype = TO_MADX[FROM_ELEGANT[_type.lower()]].upper()
+            except Exception:
+                madtype = _CONVERSION_DICT[_type.upper()]
+
+        definitions[name.upper()] = {
+            **{"family": madtype},
+            **{k.upper(): v for k, v in attributes.items()},
+        }
+
+    # get the lattice sub-lattice dicts
+    lattice = latdata.get("lattices", [])
+
+    # method to flatten the sublattices
+    def flatten(sublat_dict):
+        def _walker(k, lattices=sublat_dict):
+            for child in lattices[k]:
+                if child in lattices:
+                    yield from _walker(child)
+                else:
+                    yield child
+
+        return _walker(list(sublat_dict.keys())[-1])
+
+    # load ordered list to lattice
+    # TODO: requested madx sequence lark parser to be merged in main branch so the
+    # hack below can be avoided
+    if bool(lattice):
+        lattice = list(flatten(lattice))
+        lattice = [el.upper() for el in lattice]
+    else:
+        cdict.pop("ENDSEQUENCE")
+        lattice = [el.upper() for el in list(cdict.keys())]
+
+    # attempt to load lattice name
+    lattice_name = cdict.get("use", None)
+
+    return lattice_name, definitions, lattice
+
+
+def parse_from_madx_sequence_string(string: str) -> Tuple[str, float, pd.DataFrame]:
     """Method to parse madx seq string to table format
 
     :param str string: Madx sequence string
@@ -145,7 +257,7 @@ def parse_from_madx_sequence_string(string: str) -> (str, float, pd.DataFrame):
     return name, length, dfpos
 
 
-def parse_from_madx_sequence_file(filename: str) -> (str, float, pd.DataFrame):
+def parse_from_madx_sequence_file(filename: str) -> Tuple[str, float, pd.DataFrame]:
     """Method to parse madx seq from file to table format.
 
     :param str filename: filename of the file containing the sequence.
@@ -186,7 +298,9 @@ def _parse_table_to_madx_definitions(df: pd.DataFrame) -> str:
         line += "{:16}: {:12}, ".format(row["name"], keyword)
 
         # remove non attrs from columns
-        row = row.drop(["name", "at", "family", "end_pos", "sector"], errors="ignore").dropna()
+        row = row.drop(
+            ["name", "at", "family", "end_pos", "sector", "pos"], errors="ignore"
+        ).dropna()
 
         # add allowed madx attributes
         if len(allowed_attrs) > 0:
@@ -195,7 +309,9 @@ def _parse_table_to_madx_definitions(df: pd.DataFrame) -> str:
                     [
                         "{}:={}".format(c, row[c])
                         if c in allowed_attrs and c != "NO_CAVITY_TOTALPATH"
-                        else "{}={}".format(c, str(row[c]).lower())
+                        else "{}={}".format(c, str(row[c][:-1]).lower())
+                        if c == "NO_CAVITY_TOTALPATH"
+                        else ""
                         for c in row.index
                     ]
                 )
@@ -420,6 +536,7 @@ def parse_table_to_tracy_string(name: str, df: pd.DataFrame) -> str:
     template_oct = "{}: Multipole, L = {}, HOM = (4,{}/6.0,0.0), N = Nsext, Method = 4;".format
     template_cav = "{}: Cavity, {};".format
 
+    latname = name
     lattice_template = "{}: "
     n_elem = 10
     lattice_elements = list(df["name"].values)
@@ -568,4 +685,4 @@ def parse_table_to_tracy_file(name: str, df: pd.DataFrame, filename: str) -> Non
     :param pd.DataFrame df: table
     :param str filename: file where to save to
     """
-    save_string(parse_table_to_tracy_string(latname, df), filename)
+    save_string(parse_table_to_tracy_string(name, df), filename)
