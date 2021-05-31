@@ -3,8 +3,23 @@
 
 """Tests for `latticeadaptor` package."""
 
-import latticeadaptor.core
 import pytest
+from latticeadaptor.core import LatticeAdaptor
+
+
+def test_to_elegant():
+    la = LatticeAdaptor()
+    la._builder.name = "ring"
+    la.load_from_string(
+        """
+O1 : KOCT, L=0.05, K3=0.0
+
+ring: LINE = (O1,O1)
+""",
+        ftype="lte",
+    )
+    print(la.parse_table_to_elegant_string())
+
 
 # ==============================================================================
 # The code below is for debugging a particular test in eclipse/pydev.

@@ -1,0 +1,4 @@
+
+O1 : KOCT, L=0.05, K3=0.0
+
+ring: LINE = (O1,O1)

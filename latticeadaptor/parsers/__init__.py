@@ -128,6 +128,7 @@ from latticejson.convert import FROM_ELEGANT, TO_MADX
 _CONVERSION_DICT = {
     "KQUAD": "QUADRUPOLE",
     "KSEXT": "SEXTUPOLE",
+    "KOCT": "OCTUPOLE",
     "DRIF": "DRIFT",
     "RFCA": "RFCAVITY",
     "CSBEND": "SBEND",
@@ -453,7 +454,6 @@ def parse_table_to_elegant_string(name: str, df: pd.DataFrame) -> str:
     lattice = lattice_template(name, lattice_elements)
 
     df = df.drop_duplicates()
-
     # loop over the rows of the frame
     for _, row in df.iterrows():
         # get the element family to check against allowed attrs
