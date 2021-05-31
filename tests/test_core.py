@@ -9,7 +9,7 @@ from latticeadaptor.core import LatticeAdaptor
 
 def test_to_elegant():
     la = LatticeAdaptor()
-    la._builder.name = "ring"
+    la.builder.name = "ring"
     la.load_from_string(
         """
 O1 : KOCT, L=0.05, K3=0.0

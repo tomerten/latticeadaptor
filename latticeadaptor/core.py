@@ -49,7 +49,7 @@ class LatticeAdaptor:
         self.table = kwargs.get("table", None)
         self.filename = kwargs.get("file", None)
         self.inputstr = kwargs.get("string", None)
-        self._builder = LatticeBuilderLine()
+        self.builder = LatticeBuilderLine()
 
     @property
     def table(self):
@@ -73,12 +73,12 @@ class LatticeAdaptor:
             lattice format to load from, currenlty lte and madx allowed, by default "lte"
         """
         # use the latticebuilder to build the table
-        self._builder.load_from_file(filename, ftype)
-        self._builder.build_table()
+        self.builder.load_from_file(filename, ftype)
+        self.builder.build_table()
 
         # extract the relavant info
-        self.name = self._builder.name
-        self.table = self._builder.table
+        self.name = self.builder.name
+        self.table = self.builder.table
 
         # length is last element center pos + half the  length
         print("Length has been autoset - check if value is ok - otherwise update it.")
