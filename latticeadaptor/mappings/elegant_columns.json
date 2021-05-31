@@ -113,6 +113,19 @@
         "ISR",
         "N_KICKS"
     ],
+    "KOCT": [
+        "L",
+        "K1",
+        "K2",
+        "K3",
+        "J1",
+        "TILT",
+        "HKICK",
+        "VKICK",
+        "SYNCH_RAD",
+        "ISR",
+        "N_KICKS"
+    ],
     "OCTUPOLE": [],
     "MULTIPOLE": [],
     "RFCA": [
