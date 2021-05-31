@@ -310,7 +310,7 @@ def _parse_table_to_madx_definitions(df: pd.DataFrame) -> str:
                     [
                         "{}:={}".format(c, row[c])
                         if c in allowed_attrs and c != "NO_CAVITY_TOTALPATH"
-                        else "{}={}".format(c, str(row[c][:-1]).lower())
+                        else "{}={}".format(c, str(row[c]).lower())
                         if c == "NO_CAVITY_TOTALPATH"
                         else ""
                         for c in row.index
