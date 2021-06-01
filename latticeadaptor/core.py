@@ -390,6 +390,7 @@ class LatticeAdaptor:
         return eq, diff
 
     def update_table(self):
+        """Reload the table from the builder table."""
         # updated history
         self.history.put((deepcopy(self.name), deepcopy(self.len), deepcopy(self.table)))
 
