@@ -402,7 +402,10 @@ class LatticeAdaptor:
 
         # length is last element center pos + half the  length
         print("Length has been autoset - check if value is ok - otherwise update it.")
-        self.len = self.table.tail(1)["at"].values[-1] + self.table.tail(1)["L"].values[-1] / 2.0
+        self.len = (
+            self.builder.table.tail(1)["at"].values[-1]
+            + self.builder.table.tail(1)["L"].values[-1] / 2.0
+        )
 
     def undo(self):
         """Undo previous change."""
