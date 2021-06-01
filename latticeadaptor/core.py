@@ -76,8 +76,13 @@ class LatticeAdaptor:
         self.builder.load_from_file(filename, ftype)
         self.builder.build_table()
 
-        # extract the relavant info
-        self.name = self.builder.name
+        # extract the relevant info
+        # Better way?
+        try:
+            self.name = self.builder.name
+        except Exception:
+            self.name = "ring"
+            print("Lattice name has been autoset - check if value is ok.")
         self.table = self.builder.table
 
         # length is last element center pos + half the  length
@@ -383,6 +388,20 @@ class LatticeAdaptor:
         diff = table1[~table1["pos"].isin(table2["pos"])]
 
         return eq, diff
+
+    def update_table(self):
+        # updated history
+        self.history.put((deepcopy(self.name), deepcopy(self.len), deepcopy(self.table)))
+
+        self.builder.build_table()
+
+        # extract the relavant info
+        self.name = self.builder.name
+        self.table = self.builder.table
+
+        # length is last element center pos + half the  length
+        print("Length has been autoset - check if value is ok - otherwise update it.")
+        self.len = self.table.tail(1)["at"].values[-1] + self.table.tail(1)["L"].values[-1] / 2.0
 
     def undo(self):
         """Undo previous change."""
