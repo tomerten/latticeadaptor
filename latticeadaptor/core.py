@@ -394,6 +394,7 @@ class LatticeAdaptor:
         # updated history
         self.history.put((deepcopy(self.name), deepcopy(self.len), deepcopy(self.table)))
 
+        self.builder.positions = None
         self.builder.build_table()
 
         # extract the relavant info
