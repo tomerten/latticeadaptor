@@ -137,6 +137,7 @@ class LatticeAdaptor:
         str
             Elegant Lattice
         """
+        self.add_drifts()
         return parse_table_to_elegant_string(self.name, self.table)
 
     def parse_table_to_elegant_file(self, filename: str) -> None:
@@ -147,6 +148,8 @@ class LatticeAdaptor:
         filename : str
             filename where the seq will be written to.
         """
+        self.add_drifts()
+
         parse_table_to_elegant_file(self.name, self.table, filename)
 
     def parse_table_to_tracy_string(self) -> str:
