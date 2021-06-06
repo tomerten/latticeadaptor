@@ -31,6 +31,12 @@ seq_str_test = [
         8.0,
         pd.DataFrame([{"name": "QF", "pos": 2.0}]),
     ),
+    (
+        "MKSEPTUM        : DRIFT       , L:=0.0;",
+        None,
+        0.0,
+        pd.DataFrame([{"name": "MKSEPTUM", "family": "DRIFT", "L": 0.0}]),
+    ),
 ]
 
 table_to_seq = [

@@ -463,7 +463,6 @@ def parse_table_to_elegant_string(name: str, df: pd.DataFrame) -> str:
         # print(keyword)
         # print(TO_ELEGANT_ATTR)
         allowed_attrs = ELEGANT_ATTRIBUTES[keyword]
-        # print(allowed_attrs)
 
         line = ""
 

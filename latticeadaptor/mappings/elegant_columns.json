@@ -133,7 +133,6 @@
         "VOLT",
         "PHASE",
         "FREQ",
-        "N_KICKS",
-        "LAG"
+        "N_KICKS"
     ]
 }
