@@ -12,6 +12,7 @@ import os
 
 # your imports here ...
 import queue
+import re
 from copy import deepcopy
 from typing import Tuple
 
@@ -72,6 +73,7 @@ class LatticeAdaptor:
         ftype : str, optional
             lattice format to load from, currenlty lte and madx allowed, by default "lte"
         """
+
         # use the latticebuilder to build the table
         self.builder.load_from_file(filename, ftype)
         self.builder.build_table()
@@ -86,8 +88,22 @@ class LatticeAdaptor:
         self.table = self.builder.table
 
         # length is last element center pos + half the  length
-        print("Length has been autoset - check if value is ok - otherwise update it.")
-        self.len = self.table.tail(1)["at"].values[-1] + self.table.tail(1)["L"].values[-1] / 2.0
+        with open(filename, "r") as f:
+            txt = f.read()
+
+        length = re.findall("sequence\s*,\s*\s*[lL]\s*[:]?=\s*(\d+[.]?\d+)", txt)
+
+        if (ftype == "madx") and (len(length) != 0):
+            self.len = length[0]
+        if not self.len:
+            self.len = (
+                self.table.tail(1)["at"].values[-1] + self.table.tail(1)["L"].values[-1] / 2.0
+            )
+            print(
+                "Length has been autoset to {} - check if value is ok - otherwise update it.".format(
+                    self.len
+                )
+            )
 
     def load_from_string(self, string: str, ftype: str = "lte") -> None:
         """Load data from string.

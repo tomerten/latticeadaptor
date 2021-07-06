@@ -7,7 +7,7 @@ Package latticeadaptor
 Top-level package for latticeadaptor.
 """
 
-__version__ = "0.3.5"
+__version__ = "0.3.7"
 
 
 def hello(who='world'):
