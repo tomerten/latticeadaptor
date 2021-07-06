@@ -39,7 +39,7 @@ dependencies:
       - certifi==2021.5.30
       - chardet==4.0.0
       - cleo==0.8.1
-      - click==8.0.1
+      - click
       - clikit==0.6.2
       - cloudpickle==1.6.0
       - cookiecutter==1.7.3
