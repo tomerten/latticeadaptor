@@ -2,6 +2,14 @@
 latticeadaptor
 ==============
 
+.. image:: https://readthedocs.org/projects/latticeadaptor/badge/
+    :alt: Documentation Status
+    :scale: 100%
+    :target: http://latticeadaptor.readthedocs.io
+
+
+.. image:: https://mybinder.org/badge_logo.svg
+ :target: https://mybinder.org/v2/gh/tomerten/latticeadaptor/main?filepath=docs%2Fnotebook%2FTutorial.ipynb
 
 
 This package is used to convert a table of accelerator lattice elements and their arguments 
@@ -24,8 +32,8 @@ Features
 * Quick lattice element plotting.
 * Conversion from table to standard formats.
 
+Tutorial on Binder
+------------------
 
-.. |Docs Badge| image:: https://readthedocs.org/projects/latticeadaptor/badge/
-    :alt: Documentation Status
-    :scale: 100%
-    :target: http://latticeadaptor.readthedocs.io
+https://mybinder.org/v2/gh/tomerten/latticeadaptor/main?filepath=docs%2Fnotebook%2FTutorial.ipynb
+
