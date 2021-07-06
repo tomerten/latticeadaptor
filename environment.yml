@@ -1,0 +1,8 @@
+name: latadaptorenv
+channels:
+  - defaults
+dependencies:
+  - pip
+  - python=3.9
+  - pip:
+      - latticeadaptor==0.3.7
