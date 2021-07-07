@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "latticeadaptor"
-version = "0.3.7"
+version = "0.3.8"
 description = "<Enter a one-sentence description of this project here.>"
 authors = ["Tom Mertens <your.email@whatev.er>"]
 license = "MIT"
@@ -21,7 +21,7 @@ termcolor = "^1.1.0"
 cpymad = "^1.8.1"
 ipython = "^7.23.1"
 LatticeJSON = "^0.1.5"
-latticeconstructor = "^0.2.1"
+latticeconstructor = "^0.2.2"
 nbsphinx = "^0.8.5"
 pandoc = "^1.0.2"
 ipykernel = "^5.5.5"
