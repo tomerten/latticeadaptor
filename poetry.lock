@@ -466,7 +466,7 @@ description = "<Enter a one-sentence description of this project here.>"
 name = "latticeconstructor"
 optional = false
 python-versions = ">=3.8,<4.0"
-version = "0.2.1"
+version = "0.2.2"
 
 [package.dependencies]
 ipykernel = ">=5.5.4,<6.0.0"
@@ -1431,8 +1431,8 @@ lark-parser = [
     {file = "lark-parser-0.11.3.tar.gz", hash = "sha256:e29ca814a98bb0f81674617d878e5f611cb993c19ea47f22c80da3569425f9bd"},
 ]
 latticeconstructor = [
-    {file = "latticeconstructor-0.2.1-py3-none-any.whl", hash = "sha256:9e717199271ba6eede12a93423236382b52948f22c4e68224aa13a541c0f6929"},
-    {file = "latticeconstructor-0.2.1.tar.gz", hash = "sha256:ab40acbd853ce41308a169513100405db5568c1f1a7666910ccada8f16ce643c"},
+    {file = "latticeconstructor-0.2.2-py3-none-any.whl", hash = "sha256:6fd090adfde95eed09dc240f39139814e4c695c9c74ddfa6e2823e051f7c8401"},
+    {file = "latticeconstructor-0.2.2.tar.gz", hash = "sha256:818a03fc13a9b6626a55349fd3b3ac442b8359940fa158954ecb00c84ddc3d52"},
 ]
 latticejson = [
     {file = "LatticeJSON-0.1.5-py3-none-any.whl", hash = "sha256:8ec8616321781c16708c96cdad2951e80c7d855090edf0935ac2ccdab084281b"},

@@ -1,1 +1,15 @@
-{"project_name": "latticeadaptor", "package_name": "latticeadaptor", "full_name": "Tom Mertens", "email": "your.email@whatev.er", "github_username": "tomerten", "version": "0.0.0", "github_repo": "{{ cookiecutter.project_name }}", "default_branch": "master", "python_version": "3.7", "sphinx_html_theme": "sphinx_rtd_theme", "open_source_license": "MIT license", "py": "py", "project_short_description": "<Enter a one-sentence description of this project here.>"}
+{
+    "project_name": "latticeadaptor",
+    "package_name": "latticeadaptor",
+    "full_name": "Tom Mertens",
+    "email": "your.email@whatev.er",
+    "github_username": "tomerten",
+    "version": "0.0.0",
+    "github_repo": "{{ cookiecutter.project_name }}",
+    "default_branch": "master",
+    "python_version": "3.7",
+    "sphinx_html_theme": "sphinx_rtd_theme",
+    "open_source_license": "MIT license",
+    "py": "py",
+    "project_short_description": "Lattice editor and generator."
+}
