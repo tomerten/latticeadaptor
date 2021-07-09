@@ -45,6 +45,9 @@
     "DRIF": [
         "L"
     ],
+    "EDRIFT": [
+        "L"
+    ],
     "CSBEND": [
         "L",
         "ANGLE",
