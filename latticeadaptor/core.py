@@ -83,7 +83,7 @@ class LatticeAdaptor:
         except Exception:
             self.name = "ring"
             print("Lattice name has been autoset - check if value is ok.")
-        self.table = self.builder.table
+        self.table = self.builder.table.fillna(0.0)
 
         # length is last element center pos + half the  length
         with open(filename, "r") as f:
