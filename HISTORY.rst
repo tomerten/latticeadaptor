@@ -17,5 +17,7 @@ v0.3.9 (2021-07-07) : update dependency version numbers latticejson and latticec
 v0.3.10 (2021-07-07) : update dependency version numbers latticeconstructor (fixed indentation in latticeconstructor)
 ===============================================
 
+v0.3.11 (2021-07-07) : fixed nans
+===============================================
 
 This package was created with package `et-micc <https://github.com/etijskens/et-micc>`_,
