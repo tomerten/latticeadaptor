@@ -297,12 +297,15 @@ def _parse_table_to_madx_definitions(df: pd.DataFrame) -> str:
         line = ""
 
         # name and element type
-        line += "{:16}: {:12}, ".format(row["name"], keyword)
+        line += "{:20}: {:12}, ".format(row["name"], keyword)
 
         # remove non attrs from columns
         row = row.drop(
             ["name", "at", "family", "end_pos", "sector", "pos"], errors="ignore"
         ).dropna()
+
+        # set intersection column names and allowed attributes
+        cset = set(row.index).intersection(set(allowed_attrs))
 
         # add allowed madx attributes
         if len(allowed_attrs) > 0:
@@ -314,7 +317,7 @@ def _parse_table_to_madx_definitions(df: pd.DataFrame) -> str:
                         else "{}={}".format(c, str(row[c]).lower())
                         if c == "NO_CAVITY_TOTALPATH"
                         else ""
-                        for c in row.index
+                        for c in cset
                     ]
                 )
                 + ";\n"

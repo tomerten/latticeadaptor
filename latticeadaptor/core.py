@@ -19,12 +19,10 @@ from typing import Tuple
 import numpy as np
 import pandas as pd
 from latticeconstructor.core import LatticeBuilderLine
-from latticeconstructor.parse import parse_from_string
 
 from .parsers import (
     _parse_table_to_madx_definitions,
     parse_from_madx_sequence_file,
-    parse_from_madx_sequence_string,
     parse_table_to_elegant_file,
     parse_table_to_elegant_string,
     parse_table_to_madx_install_str,

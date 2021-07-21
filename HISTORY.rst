@@ -14,4 +14,8 @@ v0.3.8 (2021-07-07) : update dependency version numbers
 v0.3.9 (2021-07-07) : update dependency version numbers latticejson and latticeconstructor (updated elegant mapping)
 ===============================================
 
+v0.3.10 (2021-07-07) : update dependency version numbers latticeconstructor (fixed indentation in latticeconstructor)
+===============================================
+
+
 This package was created with package `et-micc <https://github.com/etijskens/et-micc>`_,
