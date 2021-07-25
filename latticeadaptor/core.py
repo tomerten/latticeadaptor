@@ -62,7 +62,7 @@ class LatticeAdaptor:
         self._table = value
         if value is not None:
             self.builder.definitions = (
-                self.table.drop(["at", "pos"], axis=1, erros="ignore")
+                self.table.drop(["at", "pos"], axis=1, errors="ignore")
                 .drop_duplicates()
                 .set_index("name", drop=True)
                 .to_dict(orient="index")
