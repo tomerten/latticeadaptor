@@ -67,7 +67,7 @@ class LatticeAdaptor:
                 .set_index("name", drop=True)
                 .to_dict(orient="index")
             )
-            self.builder.postions = self.table[["name", "at"]]
+            self.builder.positions = self.table[["name", "at"]]
             self.builder.lattice = list(self.table["name"].values)
             self.builder.name = self.name
             self.update_table()
@@ -425,7 +425,7 @@ class LatticeAdaptor:
         # updated history
         self.history.put((deepcopy(self.name), deepcopy(self.len), deepcopy(self.table)))
 
-        self.builder.positions = None
+        # self.builder.positions = None
         self.builder.build_table()
 
         # extract the relavant info
