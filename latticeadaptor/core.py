@@ -298,7 +298,7 @@ class LatticeAdaptor:
         print(pd.concat(newrows).columns)
 
         # in order to correct missing values in 'at'
-        self.table["at"] = self.table["pos"]
+        self.table["at"] = pd.concat(newrows)["pos"].values
 
     def parse_table_to_madx_line_string(self) -> str:
         """Method to convert the table to a MADX line definition lattice.
