@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "latticeadaptor"
-version = "0.3.19"
+version = "0.3.20"
 description = "<Enter a one-sentence description of this project here.>"
 authors = ["Tom Mertens <your.email@whatev.er>"]
 license = "MIT"

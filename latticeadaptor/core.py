@@ -273,16 +273,18 @@ class LatticeAdaptor:
                 #    nextrow["pos"] > row.pos,
                 #    nextrow["pos"] - (nextrow["L"] / 2.0) > row.pos + row.L / 2.0,
                 # )
-                if nextrow["pos"] - (nextrow["L"] / 2.0) > (row.pos + row.L / 2.0 - 1.0e-6):
-                    ndrift += 1
+                if (nextrow["pos"] - (nextrow["L"] / 2.0)) > (row.pos + row.L / 2.0):
                     newrow = {}
-                    newrow["name"] = name + str(ndrift)
                     newrow["family"] = family
                     newrow["L"] = np.round(
                         (nextrow["pos"] - nextrow["L"] / 2.0) - (row["pos"] + row["L"] / 2.0), 6
                     )
                     newrow["pos"] = (row["pos"] + row["L"] / 2.0) + (newrow["L"] / 2.0)
-                    newrows.append(pd.Series(newrow).to_frame().T)
+                    # only add if actual drift
+                    if newrow.L > 0.0:
+                        ndrift += 1
+                        newrow["name"] = name + str(ndrift)
+                        newrows.append(pd.Series(newrow).to_frame().T)
 
         # if lattice length is longer than end of last element there is still a drift
         if nextrow["pos"] + nextrow["L"] / 2.0 < self.len:
@@ -294,8 +296,6 @@ class LatticeAdaptor:
             newrows.append(pd.Series(newrow).to_frame().T)
 
         self.table = (pd.concat(newrows)).reset_index(drop=True)
-        print(self.table.columns)
-        print(pd.concat(newrows).columns)
 
         # in order to correct missing values in 'at'
         self.table["at"] = pd.concat(newrows)["pos"].values
