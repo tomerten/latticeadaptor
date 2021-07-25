@@ -60,6 +60,16 @@ class LatticeAdaptor:
         self.history.put((deepcopy(self.name), deepcopy(self.len), deepcopy(self.table)))
 
         self._table = value
+        self.builder.definitions = (
+            self.table.drop(["at", "pos"], axis=1, erros="ignore")
+            .drop_duplicates()
+            .set_index("name", drop=True)
+            .to_dict(orient="index")
+        )
+        self.builder.postions = self.table[["name", "at"]]
+        self.builder.lattice = list(self.table["name"].values)
+        self.builder.name = self.name
+        self.update_table()
 
     def load_from_file(self, filename: str, ftype: str = "lte") -> None:
         """Load data from file.
@@ -262,7 +272,7 @@ class LatticeAdaptor:
                 #    nextrow["pos"] > row.pos,
                 #    nextrow["pos"] - (nextrow["L"] / 2.0) > row.pos + row.L / 2.0,
                 # )
-                if nextrow["pos"] - (nextrow["L"] / 2.0) > row.pos + row.L / 2.0:
+                if nextrow["pos"] - (nextrow["L"] / 2.0) > (row.pos + row.L / 2.0 - 1.0e-6):
                     ndrift += 1
                     newrow = {}
                     newrow["name"] = name + str(ndrift)
@@ -283,6 +293,9 @@ class LatticeAdaptor:
             newrows.append(pd.Series(newrow).to_frame().T)
 
         self.table = (pd.concat(newrows)).reset_index(drop=True)
+
+        # in order to correct missing values in 'at'
+        self.table["at"] = self.table["pos"]
 
     def parse_table_to_madx_line_string(self) -> str:
         """Method to convert the table to a MADX line definition lattice.

@@ -20,4 +20,7 @@ v0.3.10 (2021-07-07) : update dependency version numbers latticeconstructor (fix
 v0.3.11 (2021-07-07) : fixed nans
 ===============================================
 
+v0.3.12 (2021-07-24) : fixed update table when assigning a table manually
+===============================================
+
 This package was created with package `et-micc <https://github.com/etijskens/et-micc>`_,
