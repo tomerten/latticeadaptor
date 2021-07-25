@@ -281,7 +281,7 @@ class LatticeAdaptor:
                     )
                     newrow["pos"] = (row["pos"] + row["L"] / 2.0) + (newrow["L"] / 2.0)
                     # only add if actual drift
-                    if newrow.L > 0.0:
+                    if newrow["L"] > 0.0:
                         ndrift += 1
                         newrow["name"] = name + str(ndrift)
                         newrows.append(pd.Series(newrow).to_frame().T)
