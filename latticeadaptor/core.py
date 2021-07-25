@@ -295,7 +295,7 @@ class LatticeAdaptor:
             newrow["pos"] = (row["pos"] + row["L"] / 2.0) + (newrow["L"] / 2.0)
             newrows.append(pd.Series(newrow).to_frame().T)
 
-        self.table = (pd.concat(newrows)).reset_index(drop=True)
+        self.table = (pd.concat(newrows)).reset_index(drop=True).fillna(0.0)
 
         # in order to correct missing values in 'at'
         self.table["at"] = pd.concat(newrows)["pos"].values
