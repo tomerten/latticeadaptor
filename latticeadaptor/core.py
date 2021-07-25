@@ -430,7 +430,7 @@ class LatticeAdaptor:
 
         # extract the relavant info
         self.name = self.builder.name
-        self.table = self.builder.table
+        self._table = self.builder.table
 
         # length is last element center pos + half the  length
         print("Length has been autoset - check if value is ok - otherwise update it.")
