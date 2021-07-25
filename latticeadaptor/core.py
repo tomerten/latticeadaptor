@@ -60,16 +60,17 @@ class LatticeAdaptor:
         self.history.put((deepcopy(self.name), deepcopy(self.len), deepcopy(self.table)))
 
         self._table = value
-        self.builder.definitions = (
-            self.table.drop(["at", "pos"], axis=1, erros="ignore")
-            .drop_duplicates()
-            .set_index("name", drop=True)
-            .to_dict(orient="index")
-        )
-        self.builder.postions = self.table[["name", "at"]]
-        self.builder.lattice = list(self.table["name"].values)
-        self.builder.name = self.name
-        self.update_table()
+        if value is not None:
+            self.builder.definitions = (
+                self.table.drop(["at", "pos"], axis=1, erros="ignore")
+                .drop_duplicates()
+                .set_index("name", drop=True)
+                .to_dict(orient="index")
+            )
+            self.builder.postions = self.table[["name", "at"]]
+            self.builder.lattice = list(self.table["name"].values)
+            self.builder.name = self.name
+            self.update_table()
 
     def load_from_file(self, filename: str, ftype: str = "lte") -> None:
         """Load data from file.
