@@ -294,6 +294,8 @@ class LatticeAdaptor:
             newrows.append(pd.Series(newrow).to_frame().T)
 
         self.table = (pd.concat(newrows)).reset_index(drop=True)
+        print(self.table.columns)
+        print(pd.concat(newrows).columns)
 
         # in order to correct missing values in 'at'
         self.table["at"] = self.table["pos"]
