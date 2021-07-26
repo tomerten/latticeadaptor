@@ -22,5 +22,7 @@
     "KMIN": "",
     "CALIB": "CALIBRATION",
     "TILT": "TILT",
-    "LAG": ""
+    "LAG": "",
+    "DX": "DX",
+    "DY": "DY"
 }
